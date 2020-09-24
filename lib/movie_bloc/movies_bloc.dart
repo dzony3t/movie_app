@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movie_app_flutter/model/movie_api.dart';
-import 'package:movie_app_flutter/repository/api_provider.dart';
 import 'package:movie_app_flutter/repository/api_repository.dart';
 
 part 'movies_event.dart';

@@ -1,6 +1,4 @@
 import 'package:movie_app_flutter/model/details.dart';
-import 'package:movie_app_flutter/model/movie_api.dart';
-import 'package:movie_app_flutter/widget/movie_details.dart';
 
 class MovieDetails {
   Details movie;
@@ -12,6 +10,7 @@ class MovieDetails {
     movie= Details.fromJson(json);
     error = '';
   }
+  // ignore: missing_return
   MovieDetails withError(String errorValue) {
     error = errorValue;
     print(error);

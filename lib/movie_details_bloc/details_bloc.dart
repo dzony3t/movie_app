@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movie_app_flutter/model/details.dart';
-import 'package:movie_app_flutter/model/details.dart';
-import 'package:movie_app_flutter/model/movie_api.dart';
 import 'package:movie_app_flutter/repository/api_repository.dart';
 
 part 'details_event.dart';

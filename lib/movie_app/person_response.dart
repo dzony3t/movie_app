@@ -7,7 +7,9 @@ class PersonResponse {
   PersonResponse({this.persons, this.error});
 
   PersonResponse.fromJson(Map<String, dynamic> json) {
-    persons = (json['results'] as List).map((e) => Person.fromJson(e)).toList();
+    persons = ((json['results'] ?? json['cast']) as List)
+        .map((e) => Person.fromJson(e))
+        .toList();
     error = '';
   }
   PersonResponse.withError(String errorValue) {

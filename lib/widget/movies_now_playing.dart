@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/model/movie_api.dart';
-import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
 import 'package:page_indicator/page_indicator.dart';
 
 class MoviesNowPlaying extends StatelessWidget {

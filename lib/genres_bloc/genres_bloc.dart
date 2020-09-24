@@ -27,6 +27,7 @@ class GenresBloc extends Bloc<GenresEvent, GenresState> {
       yield state.copyWith(genres: response.genres);
     } catch (error) {
       print(error);
+      print('cos poszlo nie tak');
     }
   }
 }

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_app_flutter/model/details.dart';
-import 'package:movie_app_flutter/model/movie_api.dart';
 import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
 import 'package:movie_app_flutter/movie_details_bloc/details_bloc.dart';
 import 'package:movie_app_flutter/widget/movie_details_texts.dart';
+
+import 'movie_cast.dart';
 
 class MovieDetails extends StatelessWidget {
   final MoviesBloc moviesBloc;
   final int index;
   final DetailsBloc detailsBloc;
 
-  const MovieDetails(
-      {Key key, this.moviesBloc, this.index, this.detailsBloc})
+  const MovieDetails({Key key, this.moviesBloc, this.index, this.detailsBloc})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class MovieDetails extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: Container(
                         alignment: Alignment.bottomCenter,
-                        height: 300,
+                        height: 270,
                         decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           image: DecorationImage(
@@ -44,52 +42,31 @@ class MovieDetails extends StatelessWidget {
                               )),
                         )),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(state.movies[index].title,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,
                             )),
-                        Expanded(
-                          child: Container(),
-                        ),
-                        RatingBar(
-                          itemSize: 40.0,
-                          initialRating: state.movies[index].rating / 2,
-                          direction: Axis.horizontal,
-                          itemCount: 1,
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.yellow,
+                        if (state.movies[index].title.length < 20)
+                          SizedBox(
+                            width: 150,
+                          )
+                        else
+                          SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        Column(
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                  text: state.movies[index].rating.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 25),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: '/10',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 19))
-                                  ]),
-                            ),
-                            Text(
-                              state.movies[index].voteCount.toString(),
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
-                  MovieDetailsTexts(detailsId: state.movies[index].id),
+                  MovieDetailsTexts(detailsId: state.movies[index].id, index: index,),
+                  MovieCast(
+                    castId: state.movies[index].id,
+                  )
 //                  Row(
 //                    children: [
 //                      const Icon(
@@ -103,7 +80,6 @@ class MovieDetails extends StatelessWidget {
 //                      ),
 //                    ],
 //                  ),
-
                 ],
               ),
             ),

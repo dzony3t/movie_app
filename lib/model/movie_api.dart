@@ -75,7 +75,6 @@ class Movie {
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
-    popularity = json['popularity'];
     rating = json["vote_average"].toDouble();
     posterPath = json['poster_path'];
     if (json['production_companies'] != null) {

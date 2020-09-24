@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/genres_bloc/genres_bloc.dart';
 import 'package:movie_app_flutter/model/genres.dart';
-import 'package:movie_app_flutter/widget/trending_movies.dart';
 
 import 'movie_genre.dart';
 
@@ -56,7 +55,6 @@ class _GenresScreenState extends State<GenresScreen>
                           labelColor: Colors.white,
                           isScrollable: true,
                           tabs: state.genres.map<Widget>((Genres genre) {
-                            print(state.genres);
                             return Container(
                               padding: EdgeInsets.only(bottom: 15, top: 10),
                               child: Text(

@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:movie_app_flutter/main.dart';
-import 'package:movie_app_flutter/model/details.dart';
 import 'package:movie_app_flutter/model/genres.dart';
 import 'package:movie_app_flutter/movie_app/details_response.dart';
+import 'package:movie_app_flutter/movie_app/film_cast_response.dart';
 import 'package:movie_app_flutter/movie_app/movie_response.dart';
 import 'package:movie_app_flutter/movie_app/person_response.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -56,6 +55,7 @@ class ApiProvider {
     } catch (error, stacktrace) {
       print(error);
       print(stacktrace);
+      return null;
     }
   }
 
@@ -104,7 +104,7 @@ class ApiProvider {
       Response response = Response();
       response = await _dio.get(getGenresUrl, queryParameters: params);
       return Genre.fromJson(response.data);
-    } catch (error, stacktrace) {
+    } catch (error) {
       return null;
     }
   }
@@ -117,8 +117,20 @@ class ApiProvider {
       Response response = Response();
       response = await _dio.get(getPersonUrl, queryParameters: params);
       return PersonResponse.fromJson(response.data);
-    } catch (error, stacktrace) {
+    } catch (error) {
       return PersonResponse.withError('error');
+    }
+  }
+
+  Future<CastResponse> getCasts(int id) async {
+    var params = {"api_key": apiKey, "language": "en-US"};
+    try {
+      final response = await _dio.get(getFilmsById + "/$id" + "/credits",
+          queryParameters: params);
+      return CastResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return CastResponse.withError("$error");
     }
   }
 }

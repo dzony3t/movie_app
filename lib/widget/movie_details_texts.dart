@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app_flutter/movie_details_bloc/details_bloc.dart';
 
 class MovieDetailsTexts extends StatefulWidget {
   final int detailsId;
-
-  const MovieDetailsTexts({Key key, this.detailsId});
+final int index;
+  const MovieDetailsTexts({Key key, this.detailsId, this.index});
   @override
   _MovieDetailsTextsState createState() => _MovieDetailsTextsState();
 }
@@ -29,7 +30,6 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
 
   @override
   Widget build(BuildContext context) {
-    print('detailsId:${widget.detailsId}');
     return BlocBuilder(
       cubit: detailsBloc,
       builder: (context, state) {
@@ -75,6 +75,37 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                             fontSize: 15,
                             fontStyle: FontStyle.italic)),
                   ),
+                  RatingBar(
+                    onRatingUpdate: null,
+                    itemSize: 20.0,
+                    initialRating: state.movie.voteAverage / 2,
+                    direction: Axis.horizontal,
+                    itemCount: 1,
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            text: state.movie.voteAverage.toString(),
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 20),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: '/10',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15))
+                            ]),
+                      ),
+                      Text(
+                        state.movie.voteCount.toString(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               Container(
@@ -103,9 +134,8 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      state.movie.overview.length > 0
-                          ? Container(
-                              width: 230,
+                      if (state.movie.overview.length > 0) Container(
+                              width: 200,
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 20),
                                 child: state.movie.overview.length > 280
@@ -119,8 +149,7 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                               ),
-                            )
-                          : Container(
+                            ) else Container(
                               width: 200,
                               child: const Text(
                                 'What does the old old maxim says? If there is no description, movie must be sh*tty or API is broken',

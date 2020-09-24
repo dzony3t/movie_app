@@ -22,7 +22,6 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
   Stream<PersonState> _getPersonData() async* {
     try {
       final response = await _repository.getPersonData();
-//      print(response.movies);
       yield state.copyWith(persons: response.persons);
     } catch (error) {
       print(error);

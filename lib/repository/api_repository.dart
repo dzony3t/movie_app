@@ -1,7 +1,6 @@
-import 'package:movie_app_flutter/model/details.dart';
 import 'package:movie_app_flutter/model/genres.dart';
-import 'package:movie_app_flutter/model/movie_api.dart';
 import 'package:movie_app_flutter/movie_app/details_response.dart';
+import 'package:movie_app_flutter/movie_app/film_cast_response.dart';
 import 'package:movie_app_flutter/movie_app/movie_response.dart';
 import 'package:movie_app_flutter/movie_app/person_response.dart';
 import 'package:movie_app_flutter/repository/api_provider.dart';
@@ -33,5 +32,8 @@ class ApiRepository {
 
   Future<MovieResponse> getUpcomingMovies(){
     return _provider.getUpcomingMovies();
+  }
+  Future<CastResponse> getCasts(id){
+    return _provider.getCasts(id);
   }
 }
