@@ -4,7 +4,7 @@ import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
 import 'package:movie_app_flutter/widget/genres_screen.dart';
 import 'package:movie_app_flutter/widget/movies_now_playing.dart';
 import 'package:movie_app_flutter/widget/popular_persons.dart';
-import 'package:movie_app_flutter/widget/trending_movies.dart';
+import 'package:movie_app_flutter/widget/top_rated.dart';
 import 'package:movie_app_flutter/widget/upcoming_movies.dart';
 
 class Movie extends StatefulWidget {
@@ -65,9 +65,9 @@ class _MovieState extends State<Movie> {
                     movies: state.movies,
                   ),
                   GenresScreen(),
-                  TrendingMovies(),
+                  TopRatedMovies(),
                   UpcomingMovies(),
-                  PopularPersons(),
+//                  PopularPersons(),
                 ],
               ),
             ),

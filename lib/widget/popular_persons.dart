@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/person_bloc/person_bloc.dart';
+import 'package:movie_app_flutter/widget/trending_people_details.dart';
 
 class PopularPersons extends StatefulWidget {
   @override
@@ -49,24 +50,36 @@ class _PopularPersonsState extends State<PopularPersons> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: 300,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.persons.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        print('dzia');
-                      },
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          state.persons[index].profilePath == null
-                              ? Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Hero(
-                                    tag: state.persons[index].id,
+            if (state.persons == null)
+              Container(
+                child: Text(
+                  'wartosci sa nulll',
+                  style: TextStyle(color: Colors.white, fontSize: 30),
+                ),
+              )
+            else
+              Container(
+                height: 300,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.persons.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PeopleDetails(
+                                      person: state.persons[index],
+                                    )),
+                          );
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            state.persons[index].profilePath == null
+                                ? Padding(
+                                    padding: const EdgeInsets.all(30.0),
                                     child: Container(
                                       width: 70.0,
                                       height: 70.0,
@@ -78,43 +91,42 @@ class _PopularPersonsState extends State<PopularPersons> {
                                         color: Colors.white,
                                       ),
                                     ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(30.0),
+                                    child: Hero(
+                                      tag: state.persons[index].id,
+                                      child: Container(
+                                          width: 70.0,
+                                          height: 70.0,
+                                          decoration: new BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: new DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                    "https://image.tmdb.org/t/p/w300/" +
+                                                        state.persons[index]
+                                                            .profilePath)),
+                                          )),
+                                    ),
                                   ),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: Hero(
-                                    tag: state.persons[index].id,
-                                    child: Container(
-                                        width: 70.0,
-                                        height: 70.0,
-                                        decoration: new BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: new DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                  "https://image.tmdb.org/t/p/w300/" +
-                                                      state.persons[index]
-                                                          .profilePath)),
-                                        )),
-                                  ),
-                                ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(
-                            state.persons[index].name,
-                            maxLines: 3,
-                            style: TextStyle(
-                                height: 1.4,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Text(
+                              state.persons[index].name,
+                              maxLines: 3,
+                              style: TextStyle(
+                                  height: 1.4,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
           ],
         );
       },

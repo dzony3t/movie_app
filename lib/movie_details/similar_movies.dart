@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
+import 'package:movie_app_flutter/similiar_bloc/similiar_bloc.dart';
 
-import '../movie_details/movie_details.dart';
+import 'movie_details.dart';
 
-class UpcomingMovies extends StatefulWidget {
+class SimilarMovies extends StatefulWidget {
+  final int similarId;
+
+  const SimilarMovies({this.similarId});
+
   @override
-  _TrendingMoviesState createState() => _TrendingMoviesState();
+  _SimilarMoviesState createState() => _SimilarMoviesState();
 }
 
-class _TrendingMoviesState extends State<UpcomingMovies> {
-  MoviesBloc moviesBloc = MoviesBloc();
+class _SimilarMoviesState extends State<SimilarMovies> {
+  SimilarBloc similarBloc = SimilarBloc();
 
   @override
   void initState() {
     super.initState();
-    moviesBloc = MoviesBloc();
-    moviesBloc.add(GetUpcomingMovies());
+    similarBloc = SimilarBloc();
+    similarBloc.add(GetSimilarMovies(id: widget.similarId));
   }
 
   @override
   void dispose() {
-    moviesBloc.close();
+    similarBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: moviesBloc,
+      cubit: similarBloc,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,8 +42,11 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
               width: double.infinity,
               color: Colors.grey,
             ),
+            SizedBox(
+              height: 5,
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(
                 children: [
                   Icon(
@@ -49,40 +55,37 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                     size: 30,
                   ),
                   Text(
-                    'Upcoming movies',
+                    'Similar Movies',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             Container(
               height: 300,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: state.movies.length,
+                  itemCount: state.similarMovies.length,
                   itemBuilder: (context, index) {
+                    print(state.similarMovies.length);
                     return Padding(
                       padding:
                           EdgeInsets.only(top: 10.0, bottom: 10.0, right: 15.0),
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MovieDetails(
-                                    index: index, moviesBloc: moviesBloc,
-//                                  trailerId:
-//                                moviesBloc.state.movies[index].id,
-                                )),
+                                builder: (context) => MovieDetails(index: index,)),
                           );
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            if (state.movies[index].posterPath == null)
+                            if (state.similarMovies[index].posterPath == null)
                               Container(
                                 width: 120.0,
                                 height: 180.0,
@@ -115,7 +118,8 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                                         fit: BoxFit.cover,
                                         image: NetworkImage(
                                             "https://image.tmdb.org/t/p/w200/" +
-                                                state.movies[index].posterPath)),
+                                                state.similarMovies[index]
+                                                    .posterPath)),
                                   )),
                             SizedBox(
                               height: 10.0,
@@ -123,49 +127,17 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                             Container(
                               width: 100,
                               child: Text(
-                                state.movies[index].title == null
-                                    ? 'brak pl tytułu'
-                                    : state.movies[index].title,
+                                state.similarMovies[index].title == null
+                                    ? 'brak polskiego tytułu'
+                                    : state.similarMovies[index].title,
                                 maxLines: 2,
                                 style: TextStyle(
                                     height: 1.4,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15.0),
+                                    fontSize: 13.0),
                               ),
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  state.movies[index].rating.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                RatingBar(
-                                  itemSize: 18.0,
-                                  initialRating: state.movies[index].rating / 2,
-                                  minRating: 1,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 5,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 2.0),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                  ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
-                                )
-                              ],
-                            )
                           ],
                         ),
                       ),

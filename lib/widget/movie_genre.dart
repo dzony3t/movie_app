@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
-import 'package:movie_app_flutter/widget/movie_details.dart';
+import 'package:movie_app_flutter/movie_details/movie_details.dart';
 
 class MovieGenre extends StatefulWidget {
   final int genreId;
@@ -30,7 +30,7 @@ class _MovieGenreState extends State<MovieGenre> {
         builder: (context, state) {
           return Container(
             color: Colors.black,
-            height: 270.0,
+            height: 300.0,
             padding: EdgeInsets.only(left: 10.0),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -46,16 +46,18 @@ class _MovieGenreState extends State<MovieGenre> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MovieDetails(
-                                index: index, moviesBloc: moviesBloc)),
+                                index: index, moviesBloc: moviesBloc,
+//                              trailerId:
+//                            state.movies[index].id,
+                            )),
                       );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        state.movies[index].posterPath == null
-                            ? Container(
+                        if (state.movies[index].posterPath == null) Container(
                               width: 120.0,
-                              height: 180.0,
+                              height: 170.0,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
                                 borderRadius:
@@ -72,8 +74,7 @@ class _MovieGenreState extends State<MovieGenre> {
                                   )
                                 ],
                               ),
-                            )
-                            : Container(
+                            ) else Container(
                                 width: 120.0,
                                 height: 180.0,
                                 decoration: BoxDecoration(
@@ -99,7 +100,7 @@ class _MovieGenreState extends State<MovieGenre> {
                                 height: 1.4,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15.0),
+                                fontSize: 13.0),
                           ),
                         ),
                         SizedBox(
@@ -112,14 +113,14 @@ class _MovieGenreState extends State<MovieGenre> {
                               state.movies[index].rating.toString(),
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 18.0,
+                                  fontSize: 15.0,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
                               width: 5.0,
                             ),
                             RatingBar(
-                              itemSize: 18.0,
+                              itemSize: 15.0,
                               initialRating: state.movies[index].rating / 2,
                               minRating: 1,
                               direction: Axis.horizontal,

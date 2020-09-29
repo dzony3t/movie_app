@@ -6,7 +6,7 @@ import 'package:movie_app_flutter/movie_details_bloc/details_bloc.dart';
 
 class MovieDetailsTexts extends StatefulWidget {
   final int detailsId;
-final int index;
+  final int index;
   const MovieDetailsTexts({Key key, this.detailsId, this.index});
   @override
   _MovieDetailsTextsState createState() => _MovieDetailsTextsState();
@@ -91,8 +91,7 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                       RichText(
                         text: TextSpan(
                             text: state.movie.voteAverage.toString(),
-                            style: TextStyle(
-                                color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                             children: <TextSpan>[
                               TextSpan(
                                   text: '/10',
@@ -113,34 +112,49 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                 width: double.infinity,
                 color: Colors.grey,
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Container(
-                        alignment: Alignment.bottomCenter,
-                        height: 200,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                              fit: BoxFit.fitHeight,
-                              image: NetworkImage(
-                                'https://image.tmdb.org/t/p/original/' +
-                                    state.movie.posterPath,
-                              )),
-                        )),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (state.movie.overview.length > 0) Container(
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 180,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: Container(
+                          alignment: Alignment.bottomCenter,
+                          height: 170,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            image: DecorationImage(
+                                fit: BoxFit.fitHeight,
+                                image: NetworkImage(
+                                  'https://image.tmdb.org/t/p/original/' +
+                                      state.movie.posterPath,
+                                )),
+                          )),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (state.movie.overview.length > 0)
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OverviewDetails(details: state.movie,)));
+                            },
+                            child: Container(
                               width: 200,
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: state.movie.overview.length > 280
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                child: state.movie.overview.length > 200
                                     ? Text(
-                                        state.movie.overview.substring(0, 281) +
+                                        state.movie.overview.substring(0, 100) +
                                             "...",
                                         style: TextStyle(color: Colors.white),
                                       )
@@ -149,7 +163,10 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                               ),
-                            ) else Container(
+                            ),
+                          )
+                        else
+                          Container(
                               width: 200,
                               child: const Text(
                                 'What does the old old maxim says? If there is no description, movie must be sh*tty or API is broken',
@@ -157,42 +174,64 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                                   color: Colors.white,
                                 ),
                               )),
-                      Container(
-                          width: 200,
-                          height: 40.0,
-                          padding: EdgeInsets.only(right: 10.0, top: 10.0),
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: state.movie.genres.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 5),
-                                  child: Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(5.0)),
-                                        border: Border.all(
-                                            width: 1.0, color: Colors.white)),
-                                    child: Text(
-                                      state.movie.genres[index].name,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          height: 1.4,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12.0),
+                        Container(
+                            width: 200,
+                            height: 35.0,
+                            padding: EdgeInsets.only(right: 10.0, top: 5.0),
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: state.movie.genres.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 5),
+                                    child: Container(
+                                      padding: EdgeInsets.all(5.0),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5.0)),
+                                          border: Border.all(
+                                              width: 1.0, color: Colors.white)),
+                                      child: Text(
+                                        state.movie.genres[index].name,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                            height: 1.4,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12.0),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }))
-                    ],
-                  ),
-                ],
+                                  );
+                                }))
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           );
       },
+    );
+  }
+}
+
+class OverviewDetails extends StatelessWidget {
+  final details;
+  OverviewDetails({this.details});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Description'),),
+      backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            child: Text(details.overview, style: TextStyle(color: Colors.white, fontSize: 15),),
+          ),
+        ),
+      ),
     );
   }
 }

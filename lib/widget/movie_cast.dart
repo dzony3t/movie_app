@@ -13,7 +13,7 @@ class MovieCast extends StatefulWidget {
 }
 
 class _MovieCastState extends State<MovieCast> {
-CastBloc castBloc  = CastBloc();
+  CastBloc castBloc = CastBloc();
 
   @override
   void initState() {
@@ -33,18 +33,15 @@ CastBloc castBloc  = CastBloc();
     return BlocBuilder(
       cubit: castBloc,
       builder: (context, state) {
-          return Container(
-            height: 140.0,
-            padding: EdgeInsets.only(left: 10.0),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: state.movieCast.length,
-              itemBuilder: (context, index) {
+        return Container(
+          height: 170.0,
+          padding: EdgeInsets.only(left: 10.0),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: state.movieCast.length,
+            itemBuilder: (context, index) {
               return Container(
-                padding: EdgeInsets.only(
-                    top: 10.0,
-                    right: 8.0
-                ),
+                padding: EdgeInsets.only(top: 10.0, right: 8.0),
                 width: 100.0,
                 child: GestureDetector(
                   onTap: () {
@@ -52,25 +49,31 @@ CastBloc castBloc  = CastBloc();
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      state.movieCast[index].profilePath == null ?
-                      Container(
-                        width: 70.0,
-                        height: 70.0,
-                        decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.black,
-                        ),
-                        child: Icon(Icons.movie, color: Colors.white,),
-                      ):
-                      Container(
-                          width: 70.0,
-                          height: 70.0,
-                          decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: new DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage("https://image.tmdb.org/t/p/w300/" + state.movieCast[index].profilePath)),
-                          )),
+                      state.movieCast[index].profilePath == null
+                          ? Container(
+                              width: 70.0,
+                              height: 70.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black,
+                              ),
+                              child: Icon(
+                                Icons.movie,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container(
+                              width: 70.0,
+                              height: 70.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        "https://image.tmdb.org/t/p/w300/" +
+                                            state
+                                                .movieCast[index].profilePath)),
+                              )),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -100,9 +103,9 @@ CastBloc castBloc  = CastBloc();
                   ),
                 ),
               );
-              },
-            ),
-          );
+            },
+          ),
+        );
       },
     );
   }

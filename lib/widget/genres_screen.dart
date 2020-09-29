@@ -38,7 +38,7 @@ class _GenresScreenState extends State<GenresScreen>
         cubit: genresBloc,
         builder: (context, state) {
           return Container(
-            height: 360,
+            height: 325,
             child: DefaultTabController(
               length: state.genres.length,
               child: Builder(builder: (BuildContext context) {
