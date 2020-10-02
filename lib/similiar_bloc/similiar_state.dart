@@ -1,7 +1,7 @@
 part of 'similiar_bloc.dart';
 
 class SimilarState extends Equatable {
-  final List<SimilarFilm> similarMovies;
+  final List<Movie> similarMovies;
 
   SimilarState({this.similarMovies});
 
@@ -10,7 +10,7 @@ class SimilarState extends Equatable {
   @override
   List<Object> get props => [similarMovies];
 
-  SimilarState copyWith({List<SimilarFilm> similarMovies}) {
+  SimilarState copyWith({List<Movie> similarMovies}) {
     return SimilarState(similarMovies: similarMovies ?? this.similarMovies);
   }
 }

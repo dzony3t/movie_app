@@ -5,6 +5,8 @@ abstract class PersonEvent extends Equatable {
 }
 
 class GetPersonsEvent extends PersonEvent {
+  final int id;
+  GetPersonsEvent({this.id});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [id];
 }

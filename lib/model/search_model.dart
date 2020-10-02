@@ -1,4 +1,39 @@
-class SimilarFilm {
+import 'movie_api.dart';
+
+class SearchResponse{
+  int page;
+  int totalResults;
+  int totalPages;
+  List<Movie> search;
+
+  SearchResponse({this.page, this.totalResults, this.totalPages, this.search});
+
+  SearchResponse.fromJson(Map<String, dynamic> json) {
+    page = json['page'];
+    totalResults = json['total_results'];
+    totalPages = json['total_pages'];
+    if (json['results'] != null) {
+     search = new List<Movie>();
+      json['results'].forEach((v) {
+        search.add(new Movie.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['page'] = this.page;
+    data['total_results'] = this.totalResults;
+    data['total_pages'] = this.totalPages;
+    if (this.search != null) {
+      data['results'] = this.search.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class SearchProperties {
+  double popularity;
   int id;
   bool video;
   int voteCount;
@@ -12,10 +47,11 @@ class SimilarFilm {
   bool adult;
   String overview;
   String posterPath;
-  double popularity;
+  double rating;
 
-  SimilarFilm(
-      {this.id,
+  SearchProperties(
+      {this.popularity,
+        this.id,
         this.video,
         this.voteCount,
         this.voteAverage,
@@ -28,13 +64,13 @@ class SimilarFilm {
         this.adult,
         this.overview,
         this.posterPath,
-        this.popularity});
+       this.rating});
 
-  SimilarFilm.fromJson(Map<String, dynamic> json) {
+  SearchProperties.fromJson(Map<String, dynamic> json) {
+    popularity = json['popularity'];
     id = json['id'];
     video = json['video'];
     voteCount = json['vote_count'];
-    voteAverage = json['vote_average'];
     title = json['title'];
     releaseDate = json['release_date'];
     originalLanguage = json['original_language'];
@@ -44,15 +80,14 @@ class SimilarFilm {
     adult = json['adult'];
     overview = json['overview'];
     posterPath = json['poster_path'];
-    popularity = json['popularity'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['popularity'] = this.popularity;
     data['id'] = this.id;
     data['video'] = this.video;
     data['vote_count'] = this.voteCount;
-    data['vote_average'] = this.voteAverage;
     data['title'] = this.title;
     data['release_date'] = this.releaseDate;
     data['original_language'] = this.originalLanguage;
@@ -62,7 +97,6 @@ class SimilarFilm {
     data['adult'] = this.adult;
     data['overview'] = this.overview;
     data['poster_path'] = this.posterPath;
-    data['popularity'] = this.popularity;
     return data;
   }
 }

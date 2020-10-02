@@ -91,7 +91,7 @@ class _MovieDetailsTextsState extends State<MovieDetailsTexts> {
                       RichText(
                         text: TextSpan(
                             text: state.movie.voteAverage.toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                            style: TextStyle(color: Colors.white, fontSize: 15, fontStyle: FontStyle.italic),
                             children: <TextSpan>[
                               TextSpan(
                                   text: '/10',

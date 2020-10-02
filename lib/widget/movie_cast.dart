@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/cast_bloc/cast_bloc.dart';
+import 'package:movie_app_flutter/widget/people_details.dart';
 
 class MovieCast extends StatefulWidget {
   final int castId;
@@ -45,6 +46,12 @@ class _MovieCastState extends State<MovieCast> {
                 width: 100.0,
                 child: GestureDetector(
                   onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PeopleDetails(
+                                  personId: state.movieCast[index].id,
+                                )));
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

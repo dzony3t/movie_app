@@ -1,181 +1,135 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app_flutter/movie_bloc/movies_bloc.dart';
+import 'package:movie_app_flutter/model/movie_api.dart';
 import 'package:movie_app_flutter/movie_details/movie_details_texts.dart';
 import 'package:movie_app_flutter/movie_details/similar_movies.dart';
-import 'package:movie_app_flutter/movie_details/trailer.dart';
-import 'package:movie_app_flutter/trailer_bloc/trailer_bloc.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:movie_app_flutter/widget/CircularClipper.dart';
+import 'package:movie_app_flutter/widget/movie_video.dart';
 
 import '../widget/movie_cast.dart';
 
-class MovieDetails extends StatefulWidget {
-  final MoviesBloc moviesBloc;
-  final int index;
+class MovieDetails extends StatelessWidget {
+  final Movie movie;
 
-  const MovieDetails({this.moviesBloc, this.index});
+  const MovieDetails({this.movie});
 
-  @override
-  _MovieDetailsState createState() => _MovieDetailsState();
-}
-
-class _MovieDetailsState extends State<MovieDetails> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      cubit: widget.moviesBloc,
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-            title: Text('Movie Details'),
-            backgroundColor: Colors.black,
-          ),
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(icon: Icon(Icons.arrow_back, size: 20, color: Colors.yellow), onPressed: (){
+                Navigator.pop(context);
+              },),
+              Stack(
                 children: [
-                  Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Container(
-                            alignment: Alignment.bottomCenter,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                    'https://image.tmdb.org/t/p/original/' +
-                                        widget.moviesBloc.state
-                                            .movies[widget.index].backdropPath,
-                                  )),
-                            )),
+                  if (movie.backdropPath == null)
+                    Container(
+                      width: double.infinity,
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                        shape: BoxShape.rectangle,
                       ),
-                      MovieVideo(
-                        trailerId:
-                            widget.moviesBloc.state.movies[widget.index].id,
+                      child: Icon(
+                        Icons.movie,
+                        color: Colors.white,
+                        size: 60.0,
                       ),
-                    ],
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      child: Row(
-                        children: [
-                          if (widget.moviesBloc.state.movies[widget.index]
-                                  .title ==
-                              null)
-                            Text('chwilowy brak polskiego tytułu w bazie',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                ))
-                          else
-                            Text(
-                                widget.moviesBloc.state.movies[widget.index]
-                                    .title,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                )),
-                        ],
+                    )
+                  else
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      child: Container(
+                        transform: Matrix4.translationValues(0.0, -10, 0.0),
+                        child: Hero(
+                          tag: movie.id,
+                          child: ClipShadowPath(
+                              clipper: CircularDetailsImageClipper(),
+                              shadow: Shadow(blurRadius: 20),
+                              child: Image(
+                                width: double.infinity,
+                                height: 300,
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                  'https://image.tmdb.org/t/p/original/' +
+                                      movie.backdropPath,
+                                ),
+                              )),
+                        ),
                       ),
                     ),
+                  MovieVideo(
+                    trailerId: movie.id,
                   ),
-                  MovieDetailsTexts(
-                    detailsId: widget.moviesBloc.state.movies[widget.index].id,
-                    index: widget.index,
+                  Positioned(
+                    bottom: -10.0,
+                    left: 5.0,
+                    child: IconButton(icon: Icon(Icons.add), color: Colors.white, iconSize: 30, onPressed: (){
+
+                    },),
                   ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.arrow_right,
-                        color: Colors.orangeAccent,
-                        size: 30,
-                      ),
-                      const Text(
-                        'Film cast: ',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                  MovieCast(
-                    castId: widget.moviesBloc.state.movies[widget.index].id,
-                  ),
-                  SimilarMovies(
-                    similarId: widget.moviesBloc.state.movies[widget.index].id,
+                  Positioned(
+                    bottom: -10.0,
+                    right: 5.0,
+                    child: IconButton(icon: Icon(Icons.share), color: Colors.white, iconSize: 30, onPressed: (){
+
+                    },),
                   ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class MovieVideo extends StatefulWidget {
-  final trailerId;
-  final int index;
-  MovieVideo({this.trailerId, this.index});
-  @override
-  _MovieVideoState createState() => _MovieVideoState();
-}
-
-class _MovieVideoState extends State<MovieVideo> {
-  TrailerBloc trailerBloc = TrailerBloc();
-
-  @override
-  void initState() {
-    super.initState();
-    trailerBloc = TrailerBloc();
-    trailerBloc.add(GetTrailers(id: widget.trailerId));
-  }
-
-  @override
-  void dispose() {
-    trailerBloc.close();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder(
-      cubit: trailerBloc,
-      builder: (context, state) {
-        return Positioned(
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MovieTrailer(
-                    controller: YoutubePlayerController(
-                      initialVideoId: trailerBloc.state.trailer[0].key,
-                      flags: YoutubePlayerFlags(
-                        autoPlay: true,
-                        mute: true,
-                      ),
-                    ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  child: Row(
+                    children: [
+                      if (movie.title == null)
+                        Text('chwilowy brak polskiego tytułu w bazie',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                            ))
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                          child: Text(movie.title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                              )),
+                        ),
+                    ],
                   ),
                 ),
-              );
-            },
-            child: Icon(
-              Icons.play_circle_outline,
-              size: 60,
-              color: Colors.grey,
-            ),
+              ),
+              MovieDetailsTexts(
+                detailsId: movie.id,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.arrow_right,
+                    color: Colors.orangeAccent,
+                    size: 30,
+                  ),
+                  const Text(
+                    'Film cast: ',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ],
+              ),
+              MovieCast(
+                castId: movie.id,
+              ),
+              SimilarMovies(similarId: movie.id),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app_flutter/model/genres.dart';
-import 'package:movie_app_flutter/model/person.dart';
+import 'package:movie_app_flutter/model/search_model.dart';
 import 'package:movie_app_flutter/model/trailer.dart';
 import 'package:movie_app_flutter/movie_app/details_response.dart';
 import 'package:movie_app_flutter/movie_app/film_cast_response.dart';
@@ -25,10 +25,11 @@ class ApiProvider {
   var getMoviesUrl = '$mainUrl/discover/movie';
   var getPlayingUrl = '$mainUrl/movie/now_playing';
   var getGenresUrl = '$mainUrl/genre/movie/list';
-  var getPersonUrl = '$mainUrl/person/popular';
+  var getPersonUrl = '$mainUrl/person';
   var getTrendingUrl = '$mainUrl/movie/top_rated';
   var getUpcomingMoviesUrl = '$mainUrl/movie/upcoming';
   var getFilmsById = '$mainUrl/movie';
+  var searchMoviesByQuery = '$mainUrl/search/movie';
 
   Future<MovieResponse> getMovies({int genreId}) async {
     print('GetMoviesMethod');
@@ -39,9 +40,7 @@ class ApiProvider {
       if (genreId != null) 'with_genres': genreId,
     };
     try {
-      final response = await _dio.get(
-          getMoviesUrl,
-          queryParameters: params);
+      final response = await _dio.get(getMoviesUrl, queryParameters: params);
       return MovieResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print(error);
@@ -74,6 +73,23 @@ class ApiProvider {
       print(error);
       print(stacktrace);
       return MovieResponse.withError('error');
+    }
+  }
+
+  Future<SearchResponse> searchMovies({String query}) async {
+    var params = {
+      "api_key": apiKey,
+      "language": "pl",
+      if (query != null) 'query': query
+    };
+    try {
+      Response response = Response();
+      response = await _dio.get(searchMoviesByQuery, queryParameters: params);
+      print(response.statusMessage);
+      return SearchResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print(error);
+      print(stacktrace);
     }
   }
 
@@ -114,18 +130,18 @@ class ApiProvider {
     }
   }
 
-  Future<PersonPopular> getPersons() async {
+  Future<PersonPopular> getPersons(int id) async {
     var params = {
       "api_key": apiKey,
-      'language': 'pl',
+      'language': 'en-US',
       "page": 1,
     };
     try {
       Response response = Response();
-      response = await _dio.get(getPersonUrl, queryParameters: params);
+      response = await _dio.get(getPersonUrl + '/$id', queryParameters: params);
       return PersonPopular.fromJson(response.data);
     } catch (error) {
-//      return PersonResponse.withError('error');
+print(error);
     }
   }
 

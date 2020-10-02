@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movie_app_flutter/model/person.dart';
-import 'package:movie_app_flutter/model/similliar.dart';
+import 'package:movie_app_flutter/model/movie_api.dart';
 import 'package:movie_app_flutter/repository/api_repository.dart';
 
 part 'similiar_event.dart';

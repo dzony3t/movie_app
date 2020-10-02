@@ -49,7 +49,7 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                     size: 30,
                   ),
                   Text(
-                    'Upcoming movies',
+                    'Najnowsze filmy',
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ],
@@ -73,9 +73,7 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MovieDetails(
-                                    index: index, moviesBloc: moviesBloc,
-//                                  trailerId:
-//                                moviesBloc.state.movies[index].id,
+                                    movie: state.movies[index],
                                 )),
                           );
                         },
@@ -126,7 +124,7 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                                 state.movies[index].title == null
                                     ? 'brak pl tytułu'
                                     : state.movies[index].title,
-                                maxLines: 2,
+                                maxLines: 1,
                                 style: TextStyle(
                                     height: 1.4,
                                     color: Colors.white,
@@ -165,13 +163,16 @@ class _TrendingMoviesState extends State<UpcomingMovies> {
                                   },
                                 )
                               ],
-                            )
+                            ),
+                            Container(child: Text(state.movies[index].releaseDate.toString(), style: TextStyle(color: Colors.white, fontSize: 15),),),
                           ],
+
                         ),
                       ),
                     );
                   }),
             ),
+
           ],
         );
       },

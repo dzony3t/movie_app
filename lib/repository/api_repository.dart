@@ -1,5 +1,5 @@
 import 'package:movie_app_flutter/model/genres.dart';
-import 'package:movie_app_flutter/model/person.dart';
+import 'package:movie_app_flutter/model/search_model.dart';
 import 'package:movie_app_flutter/model/trailer.dart';
 import 'package:movie_app_flutter/movie_app/details_response.dart';
 import 'package:movie_app_flutter/movie_app/film_cast_response.dart';
@@ -31,8 +31,8 @@ class ApiRepository {
     return _provider.getTrendingMovies();
   }
 
-  Future<PersonPopular> getPersonData() {
-    return _provider.getPersons();
+  Future<PersonPopular> getPersonData(id) {
+    return _provider.getPersons(id);
   }
 
   Future<MovieResponse> getUpcomingMovies() {
@@ -49,5 +49,9 @@ class ApiRepository {
 
   Future<Video> getTrailer(id) {
     return _provider.getTrailer(id);
+  }
+
+  Future<SearchResponse> searchMovies(String query) {
+    return _provider.searchMovies(query: query);
   }
 }

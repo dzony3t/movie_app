@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/similiar_bloc/similiar_bloc.dart';
-
 import 'movie_details.dart';
 
 class SimilarMovies extends StatefulWidget {
   final int similarId;
-
-  const SimilarMovies({this.similarId});
+  final moviesBloc;
+  const SimilarMovies({this.similarId, this.moviesBloc});
 
   @override
   _SimilarMoviesState createState() => _SimilarMoviesState();
@@ -64,86 +63,93 @@ class _SimilarMoviesState extends State<SimilarMovies> {
             SizedBox(
               height: 5,
             ),
-            Container(
-              height: 300,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.similarMovies.length,
-                  itemBuilder: (context, index) {
-                    print(state.similarMovies.length);
-                    return Padding(
-                      padding:
-                          EdgeInsets.only(top: 10.0, bottom: 10.0, right: 15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MovieDetails(index: index,)),
-                          );
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            if (state.similarMovies[index].posterPath == null)
-                              Container(
-                                width: 120.0,
-                                height: 180.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(2.0)),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.movie,
-                                      color: Colors.white,
-                                      size: 60.0,
-                                    )
-                                  ],
-                                ),
-                              )
-                            else
-                              Container(
+              Container(
+                height: 300,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.similarMovies.length,
+                    itemBuilder: (context, index) {
+                      print(state.similarMovies.length);
+                      if (state.similarMovies == [])
+                        return Container(
+                          child: Text(
+                            'chwilowy brak podobnych filmów w bazie, pracujemy nad tym!', style: TextStyle(color: Colors.white, fontSize: 30),),
+                        );
+                      else return Padding(
+                        padding: EdgeInsets.only(
+                            top: 10.0, bottom: 10.0, right: 15.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MovieDetails(
+                                    movie: state.similarMovies[index],
+                                  ),
+                                ));
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              if (state.similarMovies[index].posterPath == null)
+                                Container(
                                   width: 120.0,
                                   height: 180.0,
                                   decoration: BoxDecoration(
+                                    color: Colors.grey,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(2.0)),
                                     shape: BoxShape.rectangle,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            "https://image.tmdb.org/t/p/w200/" +
-                                                state.similarMovies[index]
-                                                    .posterPath)),
-                                  )),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Container(
-                              width: 100,
-                              child: Text(
-                                state.similarMovies[index].title == null
-                                    ? 'brak polskiego tytułu'
-                                    : state.similarMovies[index].title,
-                                maxLines: 2,
-                                style: TextStyle(
-                                    height: 1.4,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 13.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.movie,
+                                        color: Colors.white,
+                                        size: 60.0,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              else
+                                Container(
+                                    width: 120.0,
+                                    height: 180.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(2.0)),
+                                      shape: BoxShape.rectangle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              "https://image.tmdb.org/t/p/w200/" +
+                                                  state.similarMovies[index]
+                                                      .posterPath)),
+                                    )),
+                              SizedBox(
+                                height: 10.0,
                               ),
-                            ),
-                          ],
+                              Container(
+                                width: 100,
+                                child: Text(
+                                  state.similarMovies[index].title == null
+                                      ? 'brak polskiego tytułu'
+                                      : state.similarMovies[index].title,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      height: 1.4,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13.0),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  }),
-            ),
+                      );
+                    }),
+              ),
           ],
         );
       },

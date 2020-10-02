@@ -1,8 +1,8 @@
-import 'package:movie_app_flutter/model/similliar.dart';
+import 'package:movie_app_flutter/model/movie_api.dart';
 
 class Similar {
   int page;
-  List<SimilarFilm> similar;
+  List<Movie> similar;
   int totalPages;
   int totalResults;
 
@@ -11,9 +11,9 @@ class Similar {
   Similar.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
-      similar = new List<SimilarFilm>();
+      similar = new List<Movie>();
       json['results'].forEach((v) {
-        similar.add(new SimilarFilm.fromJson(v));
+        similar.add(new Movie.fromJson(v));
       });
     }
     totalPages = json['total_pages'];

@@ -47,7 +47,6 @@ class _GenresScreenState extends State<GenresScreen>
                       child: AppBar(
                         backgroundColor: Colors.black,
                         bottom: TabBar(
-//                          controller: _categoryController,
                           indicatorColor: Colors.orange,
                           indicatorSize: TabBarIndicatorSize.tab,
                           indicatorWeight: 3.0,

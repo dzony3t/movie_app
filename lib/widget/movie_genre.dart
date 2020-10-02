@@ -46,7 +46,7 @@ class _MovieGenreState extends State<MovieGenre> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MovieDetails(
-                                index: index, moviesBloc: moviesBloc,
+                                movie: state.movies[index],
 //                              trailerId:
 //                            state.movies[index].id,
                             )),
@@ -114,7 +114,7 @@ class _MovieGenreState extends State<MovieGenre> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15.0,
-                                  fontWeight: FontWeight.bold),
+                                  fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                             ),
                             SizedBox(
                               width: 5.0,

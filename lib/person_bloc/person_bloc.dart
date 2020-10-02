@@ -16,12 +16,12 @@ class PersonBloc extends Bloc<PersonEvent, PersonState> {
   Stream<PersonState> mapEventToState(
     PersonEvent event,
   ) async* {
-    if (event is GetPersonsEvent) yield* _getPersonData();
+    if (event is GetPersonsEvent) yield* _getPersonData(event);
   }
 
-  Stream<PersonState> _getPersonData() async* {
+  Stream<PersonState> _getPersonData(GetPersonsEvent event) async* {
     try {
-      final response = await _repository.getPersonData();
+      final response = await _repository.getPersonData(event.id);
       yield state.copyWith(persons: response.person);
     } catch (error) {
       print(error);
