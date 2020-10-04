@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
 
 class MoviesByGenrePage extends StatelessWidget {
   const MoviesByGenrePage({
@@ -48,7 +50,7 @@ class MoviesByGenrePage extends StatelessWidget {
                         children: <Widget>[
                           Icon(
                             Icons.movie,
-                            color: Colors.white,
+                            color: AppColors.secondColor,
                             size: 60.0,
                           )
                         ],
@@ -81,11 +83,7 @@ class MoviesByGenrePage extends StatelessWidget {
                             .substring(0, 15) +
                             '...',
                         maxLines: 2,
-                        style: TextStyle(
-                            height: 1.4,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0),
+                        style: AppTextStyles.genresTitle(),
                       ),
                     )
                   else
@@ -94,11 +92,7 @@ class MoviesByGenrePage extends StatelessWidget {
                       child: Text(
                         movies[index].title,
                         maxLines: 2,
-                        style: TextStyle(
-                            height: 1.4,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0),
+                        style: AppTextStyles.genresTitle(),
                       ),
                     ),
                   SizedBox(
@@ -109,11 +103,7 @@ class MoviesByGenrePage extends StatelessWidget {
                     children: <Widget>[
                       Text(
                        movies[index].rating.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.italic),
+                        style: AppTextStyles.rating(),
                       ),
                       SizedBox(
                         width: 5.0,

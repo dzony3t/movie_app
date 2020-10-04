@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/details_bloc/details_bloc.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/details_bloc/details_bloc.dart';
 import 'movie_details_text_page.dart';
 
 class MovieDetailsTexts extends StatefulWidget {

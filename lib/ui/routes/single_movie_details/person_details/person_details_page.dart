@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
 
 class PersonDetailsPage extends StatelessWidget {
@@ -12,7 +13,7 @@ class PersonDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black,),
+      appBar: AppBar(backgroundColor: Colors.grey[900],),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
@@ -24,7 +25,7 @@ class PersonDetailsPage extends StatelessWidget {
               child: Container(
                 child: Text(
                   persons.name,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
+                  style: AppTextStyles.detailsTitle()
                 ),
               ),
             ),
@@ -106,7 +107,7 @@ class PersonDetailsPage extends StatelessWidget {
                             child: const Text(
                               'There is no biography of current person you are looking for, but we are working on it! ',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.secondColor,
                               ),
                             )),
 
@@ -115,8 +116,7 @@ class PersonDetailsPage extends StatelessWidget {
                         child: Container(
                           child: Text(
                             'Born: ${persons.birthday.toString()}',
-                            style: TextStyle(
-                                fontSize: 15, color: Colors.white, fontStyle: FontStyle.italic),
+                            style: AppTextStyles.rating(),
                           ),
                         ),
                       ),

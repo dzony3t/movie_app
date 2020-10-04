@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
 
 import 'overview_details.dart';
@@ -139,7 +140,7 @@ class MovieDetailsTextPage extends StatelessWidget {
                         child: const Text(
                           'Sorry, there is no description of this film right now.',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.secondColor,
                           ),
                         )),
                   Container(

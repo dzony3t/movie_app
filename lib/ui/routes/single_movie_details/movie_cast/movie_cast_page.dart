@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/person_details/people_details.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/person_details/people_details.dart';
+
 
 class MovieCastPage extends StatelessWidget {
   const MovieCastPage({this.movieCast});
@@ -35,11 +37,11 @@ class MovieCastPage extends StatelessWidget {
                           height: 70.0,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.black,
+                            color: AppColors.mainColor,
                           ),
                           child: Icon(
                             Icons.movie,
-                            color: Colors.white,
+                            color: AppColors.secondColor,
                           ),
                         )
                       : Container(

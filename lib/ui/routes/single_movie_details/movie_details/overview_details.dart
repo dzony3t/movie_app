@@ -7,7 +7,7 @@ class OverviewDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Description'),),
+      appBar: AppBar(backgroundColor: Colors.grey[900], title: Text('Description'),),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(

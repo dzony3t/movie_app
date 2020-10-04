@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
 
 class SimilarMoviesPage extends StatelessWidget {
   SimilarMoviesPage({this.similarMovies});
@@ -31,7 +32,7 @@ class SimilarMoviesPage extends StatelessWidget {
               ),
               Text(
                 'Similar Movies',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style:AppTextStyles.inMainScreenTitles()
               ),
             ],
           ),
@@ -85,7 +86,7 @@ class SimilarMoviesPage extends StatelessWidget {
                                 children: <Widget>[
                                   Icon(
                                     Icons.movie,
-                                    color: Colors.white,
+                                    color: AppColors.secondColor,
                                     size: 60.0,
                                   )
                                 ],

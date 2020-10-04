@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/model/movie.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details_texts.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_similar/similar_movies.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_trailer/movie_video.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details_texts.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_similar/similar_movies.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_trailer/movie_video.dart';
 import 'package:movie_app_flutter/ui/widgets/CircularClipper.dart';
 
 import '../movie_cast/movie_cast.dart';
@@ -16,7 +16,7 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black),
+      appBar: AppBar(backgroundColor: Colors.grey[900]),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: SafeArea(
@@ -109,9 +109,9 @@ class MovieDetailsScreen extends StatelessWidget {
                     color: Colors.orangeAccent,
                     size: 30,
                   ),
-                  const Text(
+                  Text(
                     'Film cast: ',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: AppTextStyles.inMainScreenTitles(),
                   ),
                 ],
               ),

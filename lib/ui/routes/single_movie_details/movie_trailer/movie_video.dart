@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/screens/trailer_screen/trailer_bloc/trailer_bloc.dart';
 import 'package:movie_app_flutter/screens/trailer_screen/trailer_player.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieVideo extends StatefulWidget {
@@ -58,7 +59,7 @@ class _MovieVideoState extends State<MovieVideo> {
             child: Icon(
               Icons.play_circle_outline,
               size: 60,
-              color: Colors.white,
+              color: AppColors.secondColor,
             ),
           ),
         );

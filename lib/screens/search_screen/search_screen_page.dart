@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
+
 
 class SearchScreenPage extends StatelessWidget {
   const SearchScreenPage({this.results});
@@ -77,28 +79,18 @@ class SearchScreenPage extends StatelessWidget {
                                       ? 'brak polskiego tytułu'
                                       : results[index].title,
                                   maxLines: 2,
-                                  style: TextStyle(
-                                      height: 1.4,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0),
-                                ),
+                                  style: AppTextStyles.similarMoviesTitlenCast())
                               ),
                               if (results[index].releaseDate == null)
                                 Text(
                                   'no release date',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
+                                  style: AppTextStyles.detailsOverview(),
                                 )
                               else
                                 Text(
                                   '(${results[index].releaseDate.toString().substring(0, 4)})',
                                   maxLines: 2,
-                                  style: TextStyle(
-                                      height: 1.4,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.0),
+                                  style: AppTextStyles.similarMoviesTitlenCast()
                                 ),
                             ],
                           )

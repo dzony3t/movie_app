@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
 import 'package:movie_app_flutter/ui/view/succes_page_view/succes_page_view.dart';
 
 class NewestMoviesPage extends StatelessWidget {
@@ -23,12 +25,12 @@ class NewestMoviesPage extends StatelessWidget {
             children: [
               Icon(
                 Icons.arrow_right,
-                color: Colors.orangeAccent,
+                color: AppColors.iconColor,
                 size: 30,
               ),
               Text(
                 'Najnowsze filmy',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: AppTextStyles.inMainScreenTitles(),
               ),
             ],
           ),
@@ -65,10 +67,7 @@ class NewestMoviesPage extends StatelessWidget {
                           child: Container(
                             child: Text(
                               movies[index].releaseDate.toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontStyle: FontStyle.italic),
+                              style: AppTextStyles.rating(),
                             ),
                           ),
                         ),

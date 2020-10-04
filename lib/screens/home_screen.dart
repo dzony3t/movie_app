@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/screens/search_screen/search_screen.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
 import 'package:movie_app_flutter/ui/routes/movies_bloc/movies_bloc.dart';
 import 'package:movie_app_flutter/ui/routes/movies_by_genre/genres_movies.dart';
 import 'package:movie_app_flutter/ui/routes/now_playing/movies_now_playing.dart';
@@ -36,15 +38,15 @@ class _MovieState extends State<Movie> {
             appBar: AppBar(
               leading: Icon(
                 Icons.menu,
-                color: Colors.white,
+                color: AppColors.secondColor,
               ),
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.grey[900],
               centerTitle: true,
               actions: [
                 IconButton(
                   icon: Icon(
                     Icons.search,
-                    color: Colors.white,
+                    color:AppColors.secondColor,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -58,11 +60,11 @@ class _MovieState extends State<Movie> {
               ],
               title: Text(
                 'MovieApp',
-                style: TextStyle(color: Colors.orangeAccent, fontSize: 25),
+                style: AppTextStyles.detailsTitle(),
               ),
             ),
             body: Container(
-              color: Colors.black,
+              color: AppColors.mainColor,
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [

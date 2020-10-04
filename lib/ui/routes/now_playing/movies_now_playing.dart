@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/model/movie.dart';
-import 'package:movie_app_flutter/ui/routes/page_details/movie_trailer/movie_video.dart';
+import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_trailer/movie_video.dart';
 
 import '../../view/loading_view/loading_view.dart';
 

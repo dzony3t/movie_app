@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
 
 class SuccesPageView extends StatelessWidget {
   final movies;
@@ -25,7 +27,7 @@ class SuccesPageView extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   Icons.movie,
-                  color: Colors.white,
+                  color: AppColors.secondColor,
                   size: 60.0,
                 )
               ],
@@ -54,11 +56,7 @@ class SuccesPageView extends StatelessWidget {
                   ? 'brak polskiego tytułu'
                   : movies.title.toString().substring(0, 20) + '...',
               maxLines: 2,
-              style: TextStyle(
-                  height: 1.4,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0),
+              style: AppTextStyles.rating()
             ),
           )
         else
@@ -67,11 +65,7 @@ class SuccesPageView extends StatelessWidget {
             child: Text(
               movies.title == null ? 'brak polskiego tytułu' : movies.title,
               maxLines: 2,
-              style: TextStyle(
-                  height: 1.4,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.0),
+              style: AppTextStyles.rating(),
             ),
           ),
         Row(
@@ -79,10 +73,7 @@ class SuccesPageView extends StatelessWidget {
           children: <Widget>[
             Text(
               movies.rating.toString(),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold),
+              style: AppTextStyles.rating(),
             ),
             SizedBox(
               width: 5.0,
