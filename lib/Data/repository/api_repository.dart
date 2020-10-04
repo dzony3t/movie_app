@@ -1,58 +1,37 @@
-
-import 'package:movie_app_flutter/data/responses/details_response.dart';
-import 'package:movie_app_flutter/data/responses/film_cast_response.dart';
-import 'package:movie_app_flutter/data/responses/movie_response.dart';
-import 'package:movie_app_flutter/data/responses/person_response.dart';
-import 'package:movie_app_flutter/data/responses/search_response.dart';
-import 'package:movie_app_flutter/data/responses/similliar_response.dart';
-import 'package:movie_app_flutter/Data/repository/api_provider.dart';
+import 'package:movie_app_flutter/Data/response/details_response.dart';
+import 'package:movie_app_flutter/Data/response/similliar_response.dart';
+import 'package:movie_app_flutter/data/response/film_cast_response.dart';
+import 'package:movie_app_flutter/data/response/movie_response.dart';
+import 'package:movie_app_flutter/data/response/person_response.dart';
+import 'package:movie_app_flutter/data/response/search_response.dart';
+import 'package:movie_app_flutter/Data/repository/apiClient.dart';
 import 'package:movie_app_flutter/model/genres.dart';
 import 'package:movie_app_flutter/model/trailer.dart';
 
 class ApiRepository {
-  ApiProvider _provider = ApiProvider();
+  ApiClient _provider = ApiClient();
 
-  Future<MovieResponse> getMovies(int id) {
-    return _provider.getMovies(genreId: id);
-  }
+  Future<MovieResponse> getMovies(int id) => _provider.getMovies(genreId: id);
 
-  Future<MovieDetails> getMoviesDetailsById(int id) {
-    return _provider.getMoviesDetailsById(id);
-  }
+  Future<MovieDetails> getMoviesDetailsById(int id) =>
+      _provider.getMoviesDetailsById(id);
 
-  Future<Genre> getGenres() {
-    return _provider.getGenres();
-  }
+  Future<Genre> getGenres() => _provider.getGenres();
 
-  Future<MovieResponse> getActualMovies() {
-    return _provider.getActualMovies();
-  }
+  Future<MovieResponse> getActualMovies() => _provider.getActualMovies();
 
-  Future<MovieResponse> getTrendingMovies() {
-    return _provider.getTrendingMovies();
-  }
+  Future<MovieResponse> getTrendingMovies() => _provider.getTrendingMovies();
 
-  Future<PersonPopular> getPersonData(id) {
-    return _provider.getPersons(id);
-  }
+  Future<PersonPopular> getPersonData(id) => _provider.getPersons(id);
 
-  Future<MovieResponse> getUpcomingMovies() {
-    return _provider.getUpcomingMovies();
-  }
+  Future<MovieResponse> getUpcomingMovies() => _provider.getUpcomingMovies();
 
-  Future<CastResponse> getCasts(id) {
-    return _provider.getCasts(id);
-  }
+  Future<CastResponse> getCasts(id) => _provider.getCasts(id);
 
-  Future<Similar> getSimilar(id) {
-    return _provider.getSimilar(id);
-  }
+  Future<Similar> getSimilar(id) => _provider.getSimilar(id);
 
-  Future<Video> getTrailer(id) {
-    return _provider.getTrailer(id);
-  }
+  Future<Video> getTrailer(id) => _provider.getTrailer(id);
 
-  Future<SearchResponse> searchMovies(String query) {
-    return _provider.searchMovies(query: query);
-  }
+  Future<SearchResponse> searchMovies(String query) =>
+      _provider.searchMovies(query: query);
 }

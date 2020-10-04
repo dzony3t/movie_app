@@ -1,5 +1,3 @@
-
-
 import 'package:movie_app_flutter/model/details.dart';
 
 class MovieDetails {
