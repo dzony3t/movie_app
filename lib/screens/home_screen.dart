@@ -35,34 +35,7 @@ class _MovieState extends State<Movie> {
         cubit: moviesBloc,
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              leading: Icon(
-                Icons.menu,
-                color: AppColors.secondColor,
-              ),
-              backgroundColor: Colors.grey[900],
-              centerTitle: true,
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color:AppColors.secondColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SearchScreen(),
-                      ),
-                    );
-                  },
-                )
-              ],
-              title: Text(
-                'MovieApp',
-                style: AppTextStyles.detailsTitle(),
-              ),
-            ),
+            appBar: buildAppBar(context),
             body: Container(
               color: AppColors.mainColor,
               child: ListView(
@@ -80,5 +53,36 @@ class _MovieState extends State<Movie> {
             ),
           );
         });
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+            leading: Icon(
+              Icons.menu,
+              color: AppColors.secondColor,
+            ),
+            backgroundColor: Colors.grey[900],
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color:AppColors.secondColor,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(),
+                    ),
+                  );
+                },
+              )
+            ],
+            title: Text(
+              'MovieApp',
+              style: AppTextStyles.detailsTitle(),
+            ),
+          );
   }
 }

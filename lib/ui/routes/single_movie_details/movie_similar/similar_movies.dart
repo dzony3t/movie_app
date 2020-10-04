@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_similar/similar_bloc/similar_bloc.dart';
 import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_similar/similar_movie_page.dart';
-import 'package:movie_app_flutter/ui/view/loading_view/loading_view.dart';
+import 'package:movie_app_flutter/ui/widgets/loading_view/loading_view.dart';
 class SimilarMovies extends StatefulWidget {
   final int similarId;
   final moviesBloc;

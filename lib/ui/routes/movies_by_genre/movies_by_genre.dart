@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/ui/routes/movies_bloc/movies_bloc.dart';
-import 'package:movie_app_flutter/ui/view/loading_view/loading_view.dart';
+import 'package:movie_app_flutter/ui/widgets/loading_view/loading_view.dart';
 
 import 'movies_by_genre_page.dart';
 

@@ -1,7 +1,7 @@
 class Results {
   String birthday;
   String knownForDepartment;
-  Null deathday;
+  String deathday;
   int id;
   String name;
   List<String> alsoKnownAs;
@@ -12,23 +12,23 @@ class Results {
   String profilePath;
   bool adult;
   String imdbId;
-  Null homepage;
+  String homepage;
 
   Results(
       {this.birthday,
-        this.knownForDepartment,
-        this.deathday,
-        this.id,
-        this.name,
-        this.alsoKnownAs,
-        this.gender,
-        this.biography,
-        this.popularity,
-        this.placeOfBirth,
-        this.profilePath,
-        this.adult,
-        this.imdbId,
-        this.homepage});
+      this.knownForDepartment,
+      this.deathday,
+      this.id,
+      this.name,
+      this.alsoKnownAs,
+      this.gender,
+      this.biography,
+      this.popularity,
+      this.placeOfBirth,
+      this.profilePath,
+      this.adult,
+      this.imdbId,
+      this.homepage});
 
   Results.fromJson(Map<String, dynamic> json) {
     birthday = json['birthday'];

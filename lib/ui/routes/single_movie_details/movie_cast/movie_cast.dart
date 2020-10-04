@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app_flutter/ui/view/loading_view/loading_view.dart';
+import 'package:movie_app_flutter/ui/widgets/loading_view/loading_view.dart';
 
 import 'cast_bloc/cast_bloc.dart';
 import 'movie_cast_page.dart';

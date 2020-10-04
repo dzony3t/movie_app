@@ -2,12 +2,12 @@
 
 import 'package:movie_app_flutter/model/person.dart';
 
-class PersonPopular {
+class PersonResponse {
   Results person;
 
-  PersonPopular({this.person});
+  PersonResponse({this.person});
 
-  PersonPopular.fromJson(Map<String, dynamic> json) {
+  PersonResponse.fromJson(Map<String, dynamic> json) {
     person = Results.fromJson(json);
   }
 }

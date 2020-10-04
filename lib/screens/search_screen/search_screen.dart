@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/screens/search_screen/search_bloc/search_bloc.dart';
-import 'package:movie_app_flutter/screens/search_screen/search_screen_page.dart';
+import 'package:movie_app_flutter/screens/search_screen/search_screen_view.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -71,7 +71,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     if (state.results == null)
                       Container(child: Text('...'))
                     else
-                      SearchScreenPage(
+                      SearchScreenView(
                         results: state.results,
                       ),
                   ],

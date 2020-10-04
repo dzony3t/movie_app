@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
 import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
-import 'package:movie_app_flutter/ui/view/succes_page_view/succes_page_view.dart';
+import 'package:movie_app_flutter/ui/widgets/succes_page_view/succes_page_view.dart';
 
 class NewestMoviesPage extends StatelessWidget {
   const NewestMoviesPage({this.movies});

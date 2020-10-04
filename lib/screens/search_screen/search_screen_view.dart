@@ -4,8 +4,8 @@ import 'package:movie_app_flutter/theme/app_text_styles.dart';
 import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
 
 
-class SearchScreenPage extends StatelessWidget {
-  const SearchScreenPage({this.results});
+class SearchScreenView extends StatelessWidget {
+  const SearchScreenView({this.results});
   final results;
   @override
   Widget build(BuildContext context) {
