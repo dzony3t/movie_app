@@ -1,17 +1,17 @@
 import 'package:movie_app_flutter/model/details.dart';
 
-class MovieDetails {
+class MovieDetailsResponse {
   Details movie;
   String error;
 
-  MovieDetails({this.movie, this.error});
+  MovieDetailsResponse({this.movie, this.error});
 
-  MovieDetails.fromJson(Map<String, dynamic> json) {
+  MovieDetailsResponse.fromJson(Map<String, dynamic> json) {
     movie= Details.fromJson(json);
     error = '';
   }
   // ignore: missing_return
-  MovieDetails withError(String errorValue) {
+  MovieDetailsResponse withError(String errorValue) {
     error = errorValue;
     print(error);
   }

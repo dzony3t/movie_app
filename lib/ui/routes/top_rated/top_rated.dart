@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/ui/routes/movies_bloc/movies_bloc.dart';
 import 'package:movie_app_flutter/ui/routes/single_movie_details/movie_details/movie_details.dart';
-import 'package:movie_app_flutter/ui/view/loading_view/loading_view.dart';
-import 'package:movie_app_flutter/ui/view/succes_page_view/succes_page_view.dart';
+import 'package:movie_app_flutter/ui/widgets/loading_view/loading_view.dart';
+import 'package:movie_app_flutter/ui/widgets/succes_page_view/succes_page_view.dart';
 
 class TopRatedMovies extends StatefulWidget {
   @override

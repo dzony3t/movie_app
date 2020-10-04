@@ -1,14 +1,14 @@
 import 'package:movie_app_flutter/model/movie.dart';
 
-class Similar {
+class SimilarResponse {
   int page;
   List<Movie> similar;
   int totalPages;
   int totalResults;
 
-  Similar({this.page, this.similar, this.totalPages, this.totalResults});
+  SimilarResponse({this.page, this.similar, this.totalPages, this.totalResults});
 
-  Similar.fromJson(Map<String, dynamic> json) {
+  SimilarResponse.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       similar = new List<Movie>();
