@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_flutter/model/movie.dart';
+import 'package:movie_app_flutter/theme/app_text_styles.dart';
 import 'package:movie_app_flutter/ui/routes/page_details/movie_details/movie_details_texts.dart';
 import 'package:movie_app_flutter/ui/routes/page_details/movie_similar/similar_movies.dart';
 import 'package:movie_app_flutter/ui/routes/page_details/movie_trailer/movie_video.dart';
@@ -15,15 +16,13 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black),
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(icon: Icon(Icons.arrow_back, size: 20, color: Colors.yellow), onPressed: (){
-                Navigator.pop(context);
-              },),
               Stack(
                 children: [
                   if (movie.backdropPath == null)
@@ -89,18 +88,12 @@ class MovieDetailsScreen extends StatelessWidget {
                     children: [
                       if (movie.title == null)
                         Text('chwilowy brak polskiego tytułu w bazie',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                            ))
+                            style: AppTextStyles.detailsTitle())
                       else
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                           child: Text(movie.title,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                              )),
+                              style: AppTextStyles.detailsTitle()),
                         ),
                     ],
                   ),

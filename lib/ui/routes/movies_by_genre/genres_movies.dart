@@ -69,7 +69,6 @@ class _GenresScreenState extends State<GenresMovies>
                       ),
                       preferredSize: Size.fromHeight(50)),
                   body: TabBarView(
-//                    controller: _categoryController,
                     physics: NeverScrollableScrollPhysics(),
                     children: state.genres.map<Widget>((Genres genre) {
                       return MoviesByGenre(
