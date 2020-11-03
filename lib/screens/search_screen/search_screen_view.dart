@@ -12,7 +12,7 @@ class SearchScreenView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
-        height: 550,
+        height: 500,
         child: ListView.builder(
             itemCount: results.length,
             itemBuilder: (context, index) {

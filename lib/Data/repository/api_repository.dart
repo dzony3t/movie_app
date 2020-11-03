@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:movie_app_flutter/Data/response/details_response.dart';
 import 'package:movie_app_flutter/Data/response/person_response.dart';
 import 'package:movie_app_flutter/Data/response/similliar_response.dart';
@@ -7,7 +8,7 @@ import 'package:movie_app_flutter/data/response/movie_response.dart';
 import 'package:movie_app_flutter/data/response/search_response.dart';
 import 'package:movie_app_flutter/Data/repository/apiClient.dart';
 import 'package:movie_app_flutter/model/genres.dart';
-
+@singleton
 class ApiRepository {
   ApiClient _provider = ApiClient();
 

@@ -9,5 +9,6 @@ class GetDetails extends DetailsEvent {
   GetDetails({this.id});
   @override
   List<Object> get props => [id];
+//  TODO przekazac cale movie zamiast id
 }
 

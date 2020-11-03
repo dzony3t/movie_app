@@ -11,7 +11,7 @@ class MovieDetailsScreen extends StatelessWidget {
   final Movie movie;
 
   const MovieDetailsScreen({this.movie});
-
+  //TODO dac tu bloca a wywalic z details_text i tam przekazac tylko co mnie interesuje
   @override
   Widget build(BuildContext context) {
     return Scaffold(

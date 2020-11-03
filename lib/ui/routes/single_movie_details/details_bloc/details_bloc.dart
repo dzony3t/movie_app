@@ -9,8 +9,8 @@ part 'details_event.dart';
 part 'details_state.dart';
 
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
-  DetailsBloc() : super(DetailsState());
-  DetailsState get initialState => DetailsState.defaultState();
+  DetailsBloc() : super(DetailsState.defaultState());
+
   ApiRepository _repository = ApiRepository();
   @override
   Stream<DetailsState> mapEventToState(
@@ -22,6 +22,9 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   Stream<DetailsState> _getMoviesDetailsById(GetDetails event) async* {
     try {
       final response = await _repository.getMoviesDetailsById(event.id);
+      final details = response.movie;
+      //final movie = event.movie.copyWith(...details);
+      //yield state.copyWith(movie:movie);
       yield state.copyWith(movie: response.movie);
     } catch (error) {
       print(error);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/screens/search_screen/search_bloc/search_bloc.dart';
 import 'package:movie_app_flutter/screens/search_screen/search_screen_view.dart';
+import 'package:movie_app_flutter/theme/app_colors.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -49,9 +50,9 @@ class _SearchScreenState extends State<SearchScreen> {
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.grey[900],
+          backgroundColor: AppColors.darkGrey,
           appBar: AppBar(
-            backgroundColor: Colors.grey[900],
+            backgroundColor: AppColors.darkGrey
           ),
           body: Column(
             children: [
