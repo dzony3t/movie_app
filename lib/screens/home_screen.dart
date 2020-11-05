@@ -50,7 +50,7 @@ class _MovieState extends State<Film> {
               drawer: DrawerScreen(),
               appBar: buildAppBar(context),
               body: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
-                cubit: animationBloc,
+                // cubit: animationBloc,
                 builder: (context, DrawerAnimationState stan) {
                   return Stack(
                     children: [
@@ -93,7 +93,7 @@ class _MovieState extends State<Film> {
     final cubit = context.bloc<DrawerAnimationBloc>();
     return AppBar(
       leading: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
-        cubit: animationBloc,
+        // cubit: animationBloc,
         builder: (context, state) {
           return state.isOpen
               ? IconButton(

@@ -44,9 +44,8 @@ class DrawerAnimationBloc extends Cubit<DrawerAnimationState> {
     }
   }
 }
-
-// class DrawerAnimationBloc
-//     extends Bloc<DrawerAnimationEvent, DrawerAnimationState> {
+//
+// class DrawerAnimationBloc extends Bloc<DrawerAnimationEvent, DrawerAnimationState> {
 //   DrawerAnimationBloc() : super(DrawerAnimationState.defaultState());
 //
 //   @override
