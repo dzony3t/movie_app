@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app_flutter/Data/response/details_response.dart';
 import 'package:movie_app_flutter/Data/response/person_response.dart';
 import 'package:movie_app_flutter/Data/response/similliar_response.dart';
@@ -9,6 +10,7 @@ import 'package:movie_app_flutter/data/response/search_response.dart';
 import 'package:movie_app_flutter/model/genres.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+@singleton
 class ApiClient {
   final String apiKey = 'd898c08dbff906df9958e6abe49b6588';
   final Dio _dio = Dio(BaseOptions(baseUrl: 'https://api.themoviedb.org/3'))

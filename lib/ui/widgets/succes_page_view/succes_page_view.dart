@@ -54,7 +54,7 @@ class SuccesPageView extends StatelessWidget {
             child: Text(
               movies.title == null
                   ? 'brak polskiego tytułu'
-                  : movies.title.toString().substring(0, 20) + '...',
+                  : movies.title.toString().substring(0, 20) + '...', // TODO fix
               maxLines: 2,
               style: AppTextStyles.rating()
             ),

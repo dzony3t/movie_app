@@ -10,9 +10,4 @@ class MovieDetailsResponse {
     movie= Details.fromJson(json);
     error = '';
   }
-  // ignore: missing_return
-  MovieDetailsResponse withError(String errorValue) {
-    error = errorValue;
-    print(error);
-  }
 }

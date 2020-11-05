@@ -28,6 +28,13 @@ class AppTextStyles {
       fontWeight: FontWeight.bold,
       fontSize: 15.0);
 
+  static TextStyle favTitleDetail() => TextStyle(
+        height: 1.4,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 17,
+      );
+
   static TextStyle rating() => TextStyle(
       color: Colors.white,
       fontSize: 15.0,

@@ -1,7 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:movie_app_flutter/model/movie.dart';
+// part'movie_response.freezed.dart';
+// part 'movie_response.g.dart';
 
-
-class MovieResponse {
+// @freezed
+// abstract class MovieResponse with _$MovieResponse{
+// const factory MovieResponse({
+//   List<Movie> movies
+// }) = _MovieResponse;
+//   factory MovieResponse.fromJson(Map<String, dynamic> json) => _$MovieResponseFromJson(json);
+class MovieResponse{
   List<Movie> movies;
   String error;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movie_app_flutter/model/details.dart';
 import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:movie_app_flutter/theme/app_text_styles.dart';
 
@@ -8,7 +9,7 @@ import 'overview_details.dart';
 class MovieDetailsTextPage extends StatelessWidget {
   const MovieDetailsTextPage({this.movie});
 
-  final movie;
+  final Details movie;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,10 @@ class MovieDetailsTextPage extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
-              child: Text('(${movie.releaseDate.substring(0, 4)})',
-                  style: AppTextStyles.firstDetailsOfMovie()),
+              child: movie.releaseDate == null
+                  ? Text('-- -- --')
+                  : Text('(${movie.releaseDate.substring(0, 4)})',
+                      style: AppTextStyles.firstDetailsOfMovie()),
             ),
             Padding(
               padding:
@@ -53,8 +56,7 @@ class MovieDetailsTextPage extends StatelessWidget {
                       style: AppTextStyles.detailsOverview(),
                       children: <TextSpan>[
                         TextSpan(
-                            text: '/10',
-                            style: AppTextStyles.detailsOverview())
+                            text: '/10', style: AppTextStyles.detailsOverview())
                       ]),
                 ),
                 Text(
@@ -95,12 +97,12 @@ class MovieDetailsTextPage extends StatelessWidget {
                                 )),
                           ))
                       : Container(
-                    width: 100,
-                        child: Text(
+                          width: 100,
+                          child: Text(
                             'theres no poster',
                             style: AppTextStyles.detailsOverview(),
                           ),
-                      )),
+                        )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
