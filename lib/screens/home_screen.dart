@@ -42,21 +42,24 @@ class _MovieState extends State<Film> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.bloc<DrawerAnimationBloc>();
     return BlocBuilder(
         cubit: moviesBloc,
         builder: (context, state) {
           return Scaffold(
               drawer: DrawerScreen(),
               appBar: buildAppBar(context),
-              body: BlocBuilder(
+              body: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
                 cubit: animationBloc,
-                builder: (context, stan) {
+                builder: (context, DrawerAnimationState stan) {
                   return Stack(
                     children: [
                       DrawerScreen(),
                       GestureDetector(
                         onTap: () {
-                          animationBloc.add(DrawerShrinkerEvent());
+                          cubit.printuj();
+                          // tu zamiast printuj mam cubit.i metoda
+                          // animationBloc.add(DrawerShrinkerEvent());
                         },
                         child: AnimatedContainer(
                           transform: Matrix4.translationValues(
@@ -87,15 +90,18 @@ class _MovieState extends State<Film> {
   }
 
   AppBar buildAppBar(BuildContext context) {
+    final cubit = context.bloc<DrawerAnimationBloc>();
     return AppBar(
-      leading: BlocBuilder(
+      leading: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
         cubit: animationBloc,
         builder: (context, state) {
           return state.isOpen
               ? IconButton(
                   icon: Icon(Icons.arrow_back_ios),
                   onPressed: () {
-                    animationBloc.add(DrawerShrinkerEvent());
+                    // animationBloc.add(DrawerShrinkerEvent());
+                    cubit.closeDrawerHandler();
+
                   },
                 )
               : IconButton(
@@ -104,7 +110,8 @@ class _MovieState extends State<Film> {
                     color: state.isOpen == true ? Colors.red : Colors.white,
                   ),
                   onPressed: () {
-                    animationBloc.add(DrawerExpanderEvent());
+                    // animationBloc.add(DrawerExpanderEvent());
+                    cubit.expandDrawerHandler();
                   },
                 );
         },
