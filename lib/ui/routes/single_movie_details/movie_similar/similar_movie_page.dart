@@ -30,25 +30,14 @@ class SimilarMoviesPage extends StatelessWidget {
                 color: Colors.orangeAccent,
                 size: 30,
               ),
-              Text(
-                'Similar Movies',
-                style:AppTextStyles.inMainScreenTitles()
-              ),
+              Text('Similar Movies', style: AppTextStyles.inMainScreenTitles()),
             ],
           ),
         ),
         SizedBox(
           height: 5,
         ),
-        if (similarMovies == null)
-          Container(
-            child: Text(
-              'chwilowy brak podobnych filmów w bazie, pracujemy nad tym!',
-              style: AppTextStyles.detailsTitle()
-            ),
-          )
-        else
-          Container(
+        if (similarMovies != null) Container(
             height: 300,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -124,7 +113,13 @@ class SimilarMoviesPage extends StatelessWidget {
                     ),
                   );
                 }),
-          ),
+          )
+        else
+          Container(
+            child: Text(
+                'chwilowy brak podobnych filmów w bazie, pracujemy nad tym!',
+                style: AppTextStyles.detailsTitle()),
+          )
       ],
     );
   }

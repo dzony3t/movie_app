@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_flutter/ui/widgets/loading_view/loading_view.dart';
 
-import 'cast_bloc/cast_bloc.dart';
+import 'cast_cubit/cast_cubit.dart';
 import 'movie_cast_page.dart';
 
 class MovieCast extends StatefulWidget {
@@ -16,25 +16,25 @@ class MovieCast extends StatefulWidget {
 }
 
 class _MovieCastState extends State<MovieCast> {
-  CastBloc castBloc = CastBloc();
+
+  CastCubit castCubit = CastCubit();
 
   @override
   void initState() {
     super.initState();
-    castBloc = CastBloc();
-    castBloc.add(GetCastEvent(id: widget.castId));
+    castCubit.getMoviesCast(id: widget.castId);
   }
 
   @override
   void dispose() {
-    castBloc.close();
+    castCubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: castBloc,
+      cubit: castCubit,
       builder: (context, state) {
         if (state.movieCast != null) {
           return MovieCastPage(

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app_flutter/model/movie.dart';
 import 'package:movie_app_flutter/screens/favourite_screen/favourite_event.dart';

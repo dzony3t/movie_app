@@ -108,7 +108,7 @@ class MoviesByGenrePage extends StatelessWidget {
                       SizedBox(
                         width: 5.0,
                       ),
-                      RatingBar(
+                      RatingBar.builder(
                         itemSize: 15.0,
                         initialRating: movies[index].rating / 2,
                         minRating: 1,

@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 
 part 'drawer_animation_event.dart';
 part 'drawer_animation_state.dart';
 
-class DrawerAnimationBloc extends Cubit<DrawerAnimationState> {
-  DrawerAnimationBloc() : super(DrawerAnimationState.defaultState());
+@singleton
+class DrawerAnimationCubit extends Cubit<DrawerAnimationState> {
+  DrawerAnimationCubit() : super(DrawerAnimationState.defaultState());
 
   void printuj() {
     print(state.xOffset);
@@ -25,7 +27,7 @@ class DrawerAnimationBloc extends Cubit<DrawerAnimationState> {
         isOpen: true,
       ));
       print(state.xOffset);
-    } catch (erorr, stacktrace) {
+    } catch (erorr) {
       print(erorr);
     }
   }
@@ -39,7 +41,7 @@ class DrawerAnimationBloc extends Cubit<DrawerAnimationState> {
         isOpen: false,
       ));
       print(state.xOffset);
-    } catch (error, stacktrace) {
+    } catch (error) {
       print(error);
     }
   }

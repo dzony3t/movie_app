@@ -43,6 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(

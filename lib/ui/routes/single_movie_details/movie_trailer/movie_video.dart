@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app_flutter/screens/trailer_screen/trailer_bloc/trailer_bloc.dart';
+import 'package:movie_app_flutter/screens/trailer_screen/trailer_cubit/trailer_cubit.dart';
 import 'package:movie_app_flutter/screens/trailer_screen/trailer_player.dart';
 import 'package:movie_app_flutter/theme/app_colors.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -14,25 +14,24 @@ class MovieVideo extends StatefulWidget {
 }
 
 class _MovieVideoState extends State<MovieVideo> {
-  TrailerBloc trailerBloc = TrailerBloc();
+  final cubit  = TrailerCubit();
 
   @override
   void initState() {
     super.initState();
-    trailerBloc = TrailerBloc();
-    trailerBloc.add(GetTrailers(id: widget.trailerId));
+    cubit.getMoviesTrailer(id: widget.trailerId);
   }
 
   @override
   void dispose() {
-    trailerBloc.close();
+    cubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: trailerBloc,
+      cubit: cubit,
       builder: (context, state) {
         return Positioned(
           top: 0,
@@ -46,7 +45,7 @@ class _MovieVideoState extends State<MovieVideo> {
                 MaterialPageRoute(
                   builder: (context) => MovieTrailer(
                     controller: YoutubePlayerController(
-                      initialVideoId: trailerBloc.state.trailer[0].key,
+                      initialVideoId: cubit.state.trailer[0].key,
                       flags: YoutubePlayerFlags(
                         autoPlay: true,
                         mute: true,

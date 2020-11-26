@@ -16,21 +16,26 @@ class MoviesByGenre extends StatefulWidget {
 }
 
 class _MovieGenreState extends State<MoviesByGenre> {
-  MoviesBloc moviesBloc = MoviesBloc();
+  // MoviesBloc moviesBloc = MoviesBloc();
+  final cubit  = MoviesCubit();
 
   @override
   void initState() {
-    moviesBloc.add(GetMovies(id: widget.genreId));
+    // moviesBloc.add(GetMovies(id: widget.genreId));
+    cubit.getMovies(id: widget.genreId);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        cubit: moviesBloc,
+        cubit: cubit,
         builder: (context, state) {
           if (state.movies != []) {
-            return MoviesByGenrePage(movies: state.movies,);
+            return MoviesByGenrePage(
+              movies: state.movies,
+            );
           } else if (state.movies == [])
             return LoadingView();
           else
@@ -47,5 +52,4 @@ class _MovieGenreState extends State<MoviesByGenre> {
       ],
     ));
   }
-  
 }

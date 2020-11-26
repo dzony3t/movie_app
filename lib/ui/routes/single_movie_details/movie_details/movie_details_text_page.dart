@@ -37,16 +37,14 @@ class MovieDetailsTextPage extends StatelessWidget {
               child: Text(movie.adult == false ? 'PG13' : 'R',
                   style: AppTextStyles.firstDetailsOfMovie()),
             ),
-            RatingBar(
+            RatingBar.builder(
               onRatingUpdate: null,
               itemSize: 20.0,
               initialRating: movie.voteAverage / 2,
               direction: Axis.horizontal,
               itemCount: 1,
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.yellow,
-              ),
+              itemBuilder: (context, _) =>
+                  Icon(Icons.star, color: Colors.yellow),
             ),
             Column(
               children: [

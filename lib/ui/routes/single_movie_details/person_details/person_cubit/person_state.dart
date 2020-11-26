@@ -1,4 +1,4 @@
-part of 'person_bloc.dart';
+part of 'person_cubit.dart';
 
 class PersonState extends Equatable {
   const PersonState({this.persons});

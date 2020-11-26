@@ -17,20 +17,22 @@ class Film extends StatefulWidget {
 }
 
 class _MovieState extends State<Film> {
-  MoviesBloc moviesBloc = MoviesBloc();
-  DrawerAnimationBloc animationBloc = DrawerAnimationBloc();
+  MoviesCubit moviesCubit = MoviesCubit();
+  DrawerAnimationCubit animationCubit = DrawerAnimationCubit();
+  final cubit = DrawerAnimationCubit();
   @override
   void initState() {
     super.initState();
-    moviesBloc = MoviesBloc();
-    moviesBloc.add(GetMovies());
-    animationBloc = DrawerAnimationBloc();
+    moviesCubit = MoviesCubit();
+    moviesCubit.getUpcomingMovies();
+    // animationCubit = DrawerAnimationCubit();
   }
 
   @override
   void dispose() {
-    moviesBloc.close();
-    animationBloc.close();
+    // moviesBloc.close();
+    moviesCubit.close();
+    // animationCubit.close();
     super.dispose();
   }
 
@@ -42,22 +44,22 @@ class _MovieState extends State<Film> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.bloc<DrawerAnimationBloc>();
+    // final cubit = context.bloc<DrawerAnimationCubit>();
     return BlocBuilder(
-        cubit: moviesBloc,
+        cubit: moviesCubit,
         builder: (context, state) {
           return Scaffold(
               drawer: DrawerScreen(),
               appBar: buildAppBar(context),
-              body: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
-                // cubit: animationBloc,
-                builder: (context, DrawerAnimationState stan) {
+              body: BlocBuilder(
+                cubit: cubit,
+                builder: (context, stan) {
                   return Stack(
                     children: [
                       DrawerScreen(),
                       GestureDetector(
                         onTap: () {
-                          cubit.printuj();
+                        cubit.closeDrawerHandler();
                           // tu zamiast printuj mam cubit.i metoda
                           // animationBloc.add(DrawerShrinkerEvent());
                         },
@@ -90,28 +92,30 @@ class _MovieState extends State<Film> {
   }
 
   AppBar buildAppBar(BuildContext context) {
-    final cubit = context.bloc<DrawerAnimationBloc>();
+    // final cubit = context.bloc<DrawerAnimationCubit>();
     return AppBar(
-      leading: BlocBuilder<DrawerAnimationBloc, DrawerAnimationState>(
-        // cubit: animationBloc,
+      leading: BlocBuilder(
+        cubit: cubit,
         builder: (context, state) {
           return state.isOpen
               ? IconButton(
                   icon: Icon(Icons.arrow_back_ios),
                   onPressed: () {
                     // animationBloc.add(DrawerShrinkerEvent());
-                    cubit.closeDrawerHandler();
+                   cubit.closeDrawerHandler();
 
                   },
                 )
               : IconButton(
                   icon: Icon(
-                    Icons.menu,
+                    Icons.account_circle,
                     color: state.isOpen == true ? Colors.red : Colors.white,
                   ),
                   onPressed: () {
                     // animationBloc.add(DrawerExpanderEvent());
                     cubit.expandDrawerHandler();
+                    // getIt
+                    //     .get<DrawerAnimationCubit>().expandDrawerHandler();
                   },
                 );
         },

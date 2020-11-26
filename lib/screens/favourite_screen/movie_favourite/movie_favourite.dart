@@ -100,7 +100,7 @@ class _MovieFavouriteState extends State<MovieFavourite> {
                                       CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                            width: 180,
+                                            width: 150,
                                             child: Text(
                                                 favBloc.state.movies[index]
                                                     .title ==
@@ -222,6 +222,14 @@ class _MovieFavouriteState extends State<MovieFavourite> {
                               ),
                             ),
                           ),
+                          Positioned(
+                            top: 5, right: 10,
+                              child:  Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.yellow,),
+                              Text(favBloc.state.movies[index].rating.toString(), style: AppTextStyles.favTitleDetail(),),
+                            ],
+                          ))
                         ],
                       ),
                     );

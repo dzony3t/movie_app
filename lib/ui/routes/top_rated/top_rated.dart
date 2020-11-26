@@ -12,25 +12,30 @@ class TopRatedMovies extends StatefulWidget {
 }
 
 class _TrendingMoviesState extends State<TopRatedMovies> {
-  MoviesBloc moviesBloc = MoviesBloc();
-
+  // MoviesBloc moviesBloc = MoviesBloc();
+final cubit = MoviesCubit();
   @override
   void initState() {
     super.initState();
-    moviesBloc = MoviesBloc();
-    moviesBloc.add(GetTrendingMovies());
+    // moviesBloc = MoviesBloc();
+    // moviesBloc.add(GetTrendingMovies());
+    // getIt.get<MoviesCubit>().getTrendingMovies();
+    cubit.getTrendingMovies();
   }
+
 
   @override
   void dispose() {
-    moviesBloc.close();
+    // moviesBloc.close();
+    // getIt.get<MoviesCubit>().close();
+    cubit.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      cubit: moviesBloc,
+      cubit: cubit,
       builder: (context, state) {
         if (state.movies != []) {
           return buildTopRatedWidget(state);

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app_flutter/app/configure_getIt.dart';
 import 'package:movie_app_flutter/screens/drawer_navigation_screen/drawer_screen_detail.dart';
-import 'package:movie_app_flutter/screens/favourite_screen/favourite_bloc.dart';
 import 'package:movie_app_flutter/screens/favourite_screen/movie_favourite/movie_favourite.dart';
-import 'package:movie_app_flutter/theme/app_text_styles.dart';
+
 
 class DrawerScreen extends StatelessWidget {
   @override
@@ -83,22 +81,27 @@ class DrawerNavigationButton extends StatelessWidget {
   final String title;
   final GestureTapCallback onTap;
   final IconData icon;
-  DrawerNavigationButton({this.title, this.onTap, this.icon});
+  final String numberOfFavMovies;
+  DrawerNavigationButton({this.title, this.onTap, this.icon, this.numberOfFavMovies});
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.zero),
       child: Builder(
         builder: (BuildContext context) => ListTile(
-            title: Text(
-              title,
-              style: TextStyle(color: Colors.black),
+            title: Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(color: Colors.black),
+                ),
+              ],
             ),
             leading: Icon(
               icon,
               color: Colors.black,
             ),
-            onTap: onTap),
+            onTap: onTap,),
       ),
     );
   }

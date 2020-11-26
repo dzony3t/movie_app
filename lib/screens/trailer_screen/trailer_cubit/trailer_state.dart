@@ -1,4 +1,4 @@
-part of 'trailer_bloc.dart';
+part of 'trailer_cubit.dart';
 
 class TrailerState extends Equatable {
   final List<Trailer> trailer;

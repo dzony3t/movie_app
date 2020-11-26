@@ -8,6 +8,9 @@ import 'package:movie_app_flutter/model/movie.dart';
 part 'search_event.dart';
 part 'search_state.dart';
 
+
+
+
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc() : super(SearchState.defaultState());
 

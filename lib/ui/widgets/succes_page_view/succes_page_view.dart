@@ -78,7 +78,7 @@ class SuccesPageView extends StatelessWidget {
             SizedBox(
               width: 5.0,
             ),
-            RatingBar(
+            RatingBar.builder(
               itemSize: 15.0,
               initialRating: movies.rating / 2,
               minRating: 1,

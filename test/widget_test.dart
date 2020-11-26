@@ -7,7 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_app_flutter/model/movie.dart';
 import 'package:movie_app_flutter/screens/home_screen.dart';
 
 void main() {
